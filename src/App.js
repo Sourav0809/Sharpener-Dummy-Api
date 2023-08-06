@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 
 import MoviesList from './components/MoviesList';
@@ -5,11 +6,14 @@ import './App.css';
 
 function App() {
   const [movies, setMovies] = useState([])
+  const [loader, setLoader] = useState(false)
+
 
 
   //fetch handeler function to fetched some data
 
   const fetchMovieHandeler = async () => {
+    setLoader(true)
     try {
       const fetchedData = await fetch('https://swapi.dev/api/films/').then((Response) => {
         return Response.json()
@@ -24,6 +28,7 @@ function App() {
 
         }
       })
+      setLoader(false)
       setMovies(transMovies)
 
     } catch (error) {
@@ -31,13 +36,15 @@ function App() {
     }
   }
 
+  const loaderScreen = <div><img src='https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif' alt='gif img' height={100} width={100} /></div>
+
   return (
     <React.Fragment>
       <section>
         <button onClick={fetchMovieHandeler}>Fetch Movies</button>
       </section>
       <section>
-        <MoviesList movies={movies} />
+        {loader ? loaderScreen : <MoviesList movies={movies} />}
       </section>
     </React.Fragment>
   );
