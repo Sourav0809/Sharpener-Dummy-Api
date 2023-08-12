@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
@@ -10,24 +11,19 @@ function App() {
   const [error, setError] = useState(null)
   const timerRef = useRef()
 
-  // useEffect(() => {
-  //   return () => {
-  //     clearInterval(timerRef.current)
-  //   }
-  // }, [error])
 
-  const retryFunction = () => {
+  function retryFunction() {
     timerRef.current = setTimeout(() => {
       fetchMovieHandeler()
     }, 2000);
   }
 
   //fetch handeler function to fetched some data
-  async function fetchMovieHandeler() {
+  const fetchMovieHandeler = useCallback(async () => {
     setLoader(true)
     try {
 
-      const fetchedData = await fetch('https://swapi.dev/api/film/')
+      const fetchedData = await fetch('https://swapi.dev/api/films/')
       // if the api calls fails 
       if (!fetchedData.ok) {
         throw new Error("Some Thing went wrong ! Retrying...")
@@ -54,7 +50,14 @@ function App() {
     }
     setLoader(false)
 
-  }
+  }, [])
+
+  console.log(fetchMovieHandeler);
+
+  useEffect(() => {
+    fetchMovieHandeler()
+  }, [fetchMovieHandeler])
+
   //loader screen 
   const loaderScreen = <div><img src='https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif' alt='gif img' height={100} width={100} /></div>
 
@@ -75,3 +78,6 @@ function App() {
 }
 
 export default App;
+
+
+
