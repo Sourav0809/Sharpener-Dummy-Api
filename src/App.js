@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import MovieForm from './components/MovieForm';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
@@ -10,7 +11,6 @@ function App() {
   const [loader, setLoader] = useState(false)
   const [error, setError] = useState(null)
   const timerRef = useRef()
-
 
   function retryFunction() {
     timerRef.current = setTimeout(() => {
@@ -52,7 +52,6 @@ function App() {
 
   }, [])
 
-  console.log(fetchMovieHandeler);
 
   useEffect(() => {
     fetchMovieHandeler()
@@ -63,6 +62,7 @@ function App() {
 
   return (
     <>
+      <MovieForm />
       <section>
         <button onClick={fetchMovieHandeler}>Fetch Movies</button>
 

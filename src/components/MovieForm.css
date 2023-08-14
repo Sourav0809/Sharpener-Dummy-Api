@@ -1,0 +1,32 @@
+.main-form {
+    color: black;
+    background-color: white;
+    width: 40%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-item-wrapper {
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 2px 10px;
+}
+
+.form-inputs {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.form-submit-btn {
+    margin-top: 10px;
+}
