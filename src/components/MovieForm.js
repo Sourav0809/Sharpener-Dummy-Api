@@ -1,13 +1,12 @@
 import { memo } from 'react'
 import './MovieForm.css'
 import { useState } from 'react'
-const MovieForm = () => {
+const MovieForm = (props) => {
     const [title, setTitle] = useState("")
     const [openingText, setOpeningText] = useState("")
     const [releaseDate, setReleaseDate] = useState("")
 
     const titleHandeler = (e) => {
-        console.log(e.target.value)
         setTitle(e.target.value)
     }
 
@@ -25,11 +24,11 @@ const MovieForm = () => {
         e.preventDefault()
         const SubmitedData = {
             title: title,
-            ReleaseDate: releaseDate,
+            releaseDate: releaseDate,
             openingText: openingText,
         }
-        console.log(SubmitedData)
-
+        // console.log(SubmitedData)
+        props.addMovieHandeler(SubmitedData)
         setTitle("");
         setOpeningText("");
         setReleaseDate("");

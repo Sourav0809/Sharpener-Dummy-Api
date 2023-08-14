@@ -10,9 +10,11 @@ const MovieList = (props) => {
         return (
           <Movie
             key={movie.id}
+            id={movie.id}
             title={movie.title}
             releaseDate={movie.releaseDate}
             openingText={movie.openingText}
+            deletedMovie={props.deletedMovie}
           />
 
         )
